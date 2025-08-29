@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anúncio Odoo Brasil</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #714B67, #8F8F8F, #017E84);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Partículas flutuantes de fundo */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #714B67, transparent);
+            top: -150px;
+            left: -100px;
+            animation-duration: 25s;
+            animation-delay: 0s;
+        }
+
+        .particle2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #E46E78, transparent);
+            top: 50%;
+            right: -100px;
+            animation-duration: 20s;
+            animation-delay: -5s;
+        }
+
+        .particle3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #21B799, transparent);
+            bottom: -200px;
+            left: 30%;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+
+        .particle4 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #E4A900, transparent);
+            top: 20%;
+            left: 50%;
+            animation-duration: 22s;
+            animation-delay: -3s;
+        }
+
+        .particle5 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #714B67, transparent);
+            bottom: 20%;
+            right: 20%;
+            animation-duration: 28s;
+            animation-delay: -15s;
+        }
+
+        .particle6 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #E46E78, transparent);
+            top: 60%;
+            left: 10%;
+            animation-duration: 24s;
+            animation-delay: -8s;
+        }
+
+        .particle7 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #21B799, transparent);
+            top: -100px;
+            right: 30%;
+            animation-duration: 35s;
+            animation-delay: -12s;
+        }
+
+        .particle8 {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #E4A900, transparent);
+            bottom: 40%;
+            left: 70%;
+            animation-duration: 20s;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(100px, -50px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translate(-50px, 100px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translate(-100px, -30px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Efeito de ruído de TV */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 1;
+            animation: noise 0.7s infinite;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter></defs><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+        }
+
+
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 10px rgba(113, 75, 103, 0.3));
+        }
+
+        .countdown-container {
+            padding: 40px 60px;
+            position: relative;
+        }
+
+        .countdown-title {
+            color: white;
+            font-size: 1.4em;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            animation: textGlitch 4s infinite;
+            text-align: center;
+        }
+
+        .countdown-display {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-value {
+            font-size: 4em;
+            color: white;
+            font-weight: bold;
+            min-width: 120px;
+            padding: 10px 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-value::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            animation: sweep 3s infinite;
+            border-radius: 8px;
+        }
+
+        .time-label {
+            font-size: 0.8em;
+            color: white;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .separator {
+            font-size: 3em;
+            color: white;
+            animation: blink 1s infinite;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 30px;
+        }
+
+        .announcement-text {
+            color: #8F8F8F;
+            font-size: 1em;
+            margin-top: 30px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* Animações */
+        @keyframes noise {
+            0%, 100% { opacity: 0.03; }
+            50% { opacity: 0.06; }
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        @keyframes borderGlow {
+
+        @keyframes intensiveGlitch {
+            0% { 
+                filter: hue-rotate(0deg) saturate(1);
+                transform: translateX(0) translateY(0);
+            }
+            20% { 
+                filter: hue-rotate(90deg) saturate(3) contrast(1.5);
+                transform: translateX(-8px) translateY(3px);
+            }
+            40% { 
+                filter: hue-rotate(270deg) saturate(4) contrast(2);
+                transform: translateX(12px) translateY(-5px);
+            }
+            60% { 
+                filter: hue-rotate(180deg) saturate(2) contrast(1.8);
+                transform: translateX(-4px) translateY(2px);
+            }
+            80% { 
+                filter: hue-rotate(45deg) saturate(5) contrast(2.5);
+                transform: translateX(6px) translateY(-3px);
+            }
+            100% { 
+                filter: hue-rotate(0deg) saturate(1);
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes intensiveGlitch {
+            0%, 85%, 100% { 
+                opacity: 0;
+                transform: translateX(0);
+            }
+            86% { 
+                opacity: 0.3;
+                transform: translateX(-10px) scaleX(1.1);
+            }
+            87% { 
+                opacity: 0.6;
+                transform: translateX(8px) scaleX(0.9);
+            }
+            88% { 
+                opacity: 0.8;
+                transform: translateX(-5px) scaleX(1.2);
+            }
+            89% { 
+                opacity: 0.4;
+                transform: translateX(12px) scaleX(0.8);
+            }
+            90% { 
+                opacity: 0.9;
+                transform: translateX(-8px) scaleX(1.1);
+            }
+            91% { 
+                opacity: 0;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes screenGlitch {
+            0%, 94%, 100% { 
+                transform: translateX(0) translateY(0);
+                filter: hue-rotate(0deg);
+            }
+            94.5% { 
+                transform: translateX(-5px) translateY(2px);
+                filter: hue-rotate(90deg) saturate(2);
+            }
+            95% { 
+                transform: translateX(8px) translateY(-3px);
+                filter: hue-rotate(270deg) saturate(3);
+            }
+            95.5% { 
+                transform: translateX(-3px) translateY(1px);
+                filter: hue-rotate(180deg) saturate(1.5);
+            }
+            96% { 
+                transform: translateX(10px) translateY(-2px);
+                filter: hue-rotate(45deg) saturate(2.5);
+            }
+            96.5% { 
+                transform: translateX(0) translateY(0);
+                filter: hue-rotate(0deg);
+            }
+        }
+
+        @keyframes textGlitch {
+            0%, 88%, 100% { 
+                transform: translate(0);
+                color: white;
+            }
+            89% { 
+                transform: translate(-2px, -1px);
+                color: #ff0040;
+                text-shadow: 2px 0 #00ffff;
+            }
+            90% { 
+                transform: translate(3px, 2px);
+                color: #00ffff;
+                text-shadow: -2px 0 #ff0040;
+            }
+            91% { 
+                transform: translate(-1px, 1px);
+                color: #ffff00;
+                text-shadow: 1px 0 #ff0040, -1px 0 #00ffff;
+            }
+            92% { 
+                transform: translate(2px, -2px);
+                color: white;
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        @keyframes sweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .countdown-display {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .time-value {
+                font-size: 2.5em;
+                min-width: 80px;
+            }
+            
+            .separator {
+                font-size: 2em;
+            }
+            
+            .countdown-container {
+                padding: 30px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fundo -->
+    <div class="particle particle1"></div>
+    <div class="particle particle2"></div>
+    <div class="particle particle3"></div>
+    <div class="particle particle4"></div>
+    <div class="particle particle5"></div>
+    <div class="particle particle6"></div>
+    <div class="particle particle7"></div>
+    <div class="particle particle8"></div>
+    
+    <div class="container">
+        <div class="countdown-container">
+            <div class="countdown-title">Falta exatos:</div>
+            
+            <div class="countdown-display">
+                <div class="time-unit">
+                    <div class="time-value" id="days">00</div>
+                    <div class="time-label">Dias</div>
+                </div>
+                
+                <div class="separator">:</div>
+                
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Horas</div>
+                </div>
+                
+                <div class="separator">:</div>
+                
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minutos</div>
+                </div>
+                
+                <div class="separator">:</div>
+                
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Segundos</div>
+                </div>
+            </div>
+            
+            <div class="countdown-title" style="margin-top: 40px;">Você não vai querer perder Odooer...</div>
+        </div>
+    </div>
+
+    <!-- SUBSTITUA AQUI PELA SUA LOGO -->
+    <img src="odoo_logo_inverted.svg" alt="Logo" style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 120px; opacity: 0.9; z-index: 5;">
+
+    <script>
+        // Data do anúncio: 19/12/2025 às 20:00
+        const targetDate = new Date('2025-12-19T20:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Quando chegar a zero
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                document.querySelector('.countdown-title').textContent = 'O Grande Momento Chegou!';
+                document.querySelectorAll('.countdown-title')[1].style.display = 'none';
+            }
+        }
+
+        // Atualizar a cada segundo
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Efeito adicional de glitch ocasional intenso
+        setInterval(() => {
+            if (Math.random() < 0.35) { // 35% de chance a cada 800ms
+                const body = document.body;
+                const container = document.querySelector('.container');
+                const elements = document.querySelectorAll('.time-value');
+                
+                // Glitch na tela toda
+                body.classList.add('screen-glitch');
+                body.style.filter = 'hue-rotate(' + (Math.random() * 360) + 'deg) saturate(3) contrast(1.5)';
+                body.style.transform = 'translateX(' + (Math.random() * 15 - 7.5) + 'px) translateY(' + (Math.random() * 10 - 5) + 'px)';
+                
+                container.style.filter = 'hue-rotate(' + (Math.random() * 360) + 'deg) saturate(3)';
+                container.style.transform = 'translateX(' + (Math.random() * 20 - 10) + 'px) translateY(' + (Math.random() * 10 - 5) + 'px)';
+                
+                // Glitch nos números
+                elements.forEach(el => {
+                    el.style.color = ['#ff0040', '#00ffff', '#ffff00', 'white'][Math.floor(Math.random() * 4)];
+                    el.style.textShadow = '3px 0 #ff0040, -3px 0 #00ffff';
+                    el.style.transform = 'translate(' + (Math.random() * 8 - 4) + 'px, ' + (Math.random() * 8 - 4) + 'px) scale(' + (0.95 + Math.random() * 0.1) + ')';
+                });
+                
+                setTimeout(() => {
+                    body.classList.remove('screen-glitch');
+                    body.style.filter = 'none';
+                    body.style.transform = 'none';
+                    container.style.filter = 'none';
+                    container.style.transform = 'none';
+                    elements.forEach(el => {
+                        el.style.color = 'white';
+                        el.style.textShadow = 'none';
+                        el.style.transform = 'none';
+                    });
+                }, 150 + Math.random() * 200);
+            }
+        }, 800);
+
+        // Glitch adicional mais frequente e sutil
+        setInterval(() => {
+            if (Math.random() < 0.6) { // 60% de chance a cada 500ms
+                const body = document.body;
+                const elements = document.querySelectorAll('.time-value');
+                const title = document.querySelector('.countdown-title');
+                
+                // Glitch sutil na tela toda
+                body.style.filter = 'hue-rotate(' + (Math.random() * 60 - 30) + 'deg) saturate(' + (1.2 + Math.random() * 0.8) + ')';
+                body.style.transform = 'translateX(' + (Math.random() * 4 - 2) + 'px)';
+                
+                elements.forEach(el => {
+                    if (Math.random() < 0.7) {
+                        el.style.color = ['#ff0040', '#00ffff', 'white'][Math.floor(Math.random() * 3)];
+                        el.style.transform = 'translateX(' + (Math.random() * 4 - 2) + 'px)';
+                    }
+                });
+                
+                if (Math.random() < 0.4) {
+                    title.style.color = ['#ff0040', '#00ffff', '#ffff00', 'white'][Math.floor(Math.random() * 4)];
+                    title.style.textShadow = '2px 0 #ff0040, -2px 0 #00ffff';
+                }
+                
+                setTimeout(() => {
+                    body.style.filter = 'none';
+                    body.style.transform = 'none';
+                    elements.forEach(el => {
+                        el.style.color = 'white';
+                        el.style.transform = 'none';
+                    });
+                    title.style.color = 'white';
+                    title.style.textShadow = 'none';
+                }, 80 + Math.random() * 120);
+            }
+        }, 500);
+    </script>
+</body>
+</html>
